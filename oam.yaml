@@ -1,0 +1,41 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: api-demo1
+spec:
+  components:
+    - name: api-demo1
+      type: webservice
+      properties:
+        image: aichapterera/api-demo1:latest
+        port: 8000
+        cmd: ["python", "src/api-v2.py"]
+        env:
+          - name: ENV
+            value: "production"
+        imagePullSecrets:             # 指定私有镜像凭证
+          - name: my-dockerhub-secret
+      traits:
+        - type: ingress
+          properties:
+            domain: "api.example.com"
+            http:
+              "/": 8000 
+        - type: scaler
+          properties:
+            replicas: 2
+        - type: rollout
+          properties:
+            policy: canary
+            stepSize: 1
+        - type: resources
+          properties:
+            cpu: "500m"
+            memory: "512Mi"
+        - type: configmap
+          properties:
+            data:
+              LOG_LEVEL: "info"
+        - type: secret
+          properties:
+            secretName: my-api-secret
