@@ -13,14 +13,10 @@ spec:
         env:
           - name: ENV
             value: "production"
-        imagePullSecrets:             # 指定私有镜像凭证
-          - name: my-dockerhub-secret
+        imagePullSecrets:             # 私有镜像凭证
+          - name: api-demo1-dockerhub-secret
+        expose: true                  # 关键：让 KubeVela 自动暴露 Service
       traits:
-        - type: ingress
-          properties:
-            domain: "api.example.com"
-            http:
-              "/": 8000 
         - type: scaler
           properties:
             replicas: 2
@@ -32,10 +28,3 @@ spec:
           properties:
             cpu: "500m"
             memory: "512Mi"
-        - type: configmap
-          properties:
-            data:
-              LOG_LEVEL: "info"
-        - type: secret
-          properties:
-            secretName: my-api-secret
