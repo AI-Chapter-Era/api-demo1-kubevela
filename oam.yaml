@@ -9,7 +9,7 @@ spec:
       type: webservice
       properties:
         image: aichapterera/api-demo1:20250831201100
-        port: 8000
+        port: 8080
         cmd: ["python", "src/api-v2.py"]
         env:
           - name: ENV
