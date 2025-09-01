@@ -21,10 +21,6 @@ spec:
         - type: scaler
           properties:
             replicas: 2
-        - type: rollout
-          properties:
-            policy: canary
-            stepSize: 1
         - type: resources
           properties:
             cpu: "500m"
