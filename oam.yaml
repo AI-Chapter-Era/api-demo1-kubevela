@@ -21,7 +21,4 @@ spec:
         - type: scaler
           properties:
             replicas: 2
-        - type: resources
-          properties:
-            cpu: "500m"
-            memory: "512Mi"
+
