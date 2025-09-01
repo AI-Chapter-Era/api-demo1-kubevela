@@ -14,8 +14,6 @@ spec:
         env:
           - name: ENV
             value: "production"
-        imagePullSecrets:             # 私有镜像凭证
-          - api-demo1-dockerhub-secret
         expose: true                  # 关键：让 KubeVela 自动暴露 Service
       traits:
         - type: scaler
