@@ -19,3 +19,7 @@ spec:
         - type: scaler
           properties:
             replicas: 6
+        - type: ingress
+          properties:
+            http:
+              "/": 8080
